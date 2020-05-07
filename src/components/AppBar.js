@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -7,6 +7,9 @@ import InputBase from '@material-ui/core/InputBase';
 import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import IconButton from '@material-ui/core/IconButton';
+import{ useDispatch, useSelector } from 'react-redux';
+
+import { loadStock } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -61,7 +64,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function PrimarySearchAppBar() {
+  const [name, setName] = useState("");
   const classes = useStyles();
+  const dispatch = useDispatch()
+    const loading = useSelector(state => state.loading)
 
   return (
     <div className={classes.grow}>
@@ -81,6 +87,20 @@ export default function PrimarySearchAppBar() {
                 input: classes.inputInput,
               }}
               inputProps={{ 'aria-label': 'search' }}
+              value={name}
+                onChange={(event) => {
+                    setName(event.target.value);
+                }}
+                onKeyDown={(event)=>{
+                    if (event.keyCode === 13){
+                        if (!loading){
+                            dispatch(loadStock(name))
+                            setName("");
+                        }
+                        event.preventDefault();
+                        return false;
+                    }
+                }}
             />
           </div>
           <div className={classes.grow} />
