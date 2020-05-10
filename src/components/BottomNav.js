@@ -6,6 +6,16 @@ import AnnouncementOutlinedIcon from '@material-ui/icons/AnnouncementOutlined';
 import HomeIcon from '@material-ui/icons/Home';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import { Link, useLocation } from 'react-router-dom';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import purple from '@material-ui/core/colors/purple';
+
+
+const theme = createMuiTheme({
+    palette: {
+      primary: purple,
+    },
+  });
 
 const useStyles = makeStyles({
     root: {
@@ -31,33 +41,36 @@ export default function SimpleBottomNavigation() {
     });
 
     return (
-        <BottomNavigation
-        value={value}
-        onChange={(event, newValue) => {
-            setValue(newValue);
-        }}
-        showLabels
-        className={classes.root}
-        >
-            <BottomNavigationAction 
-                label="News" 
-                icon={<AnnouncementOutlinedIcon />} 
-                component={Link}
-                to="/news"
-            />
-            <BottomNavigationAction 
-                label="StockSunny" 
-                icon={<HomeIcon />} 
-                component={Link}
-                to="/"
-            />
-            <BottomNavigationAction 
-                label="Help" 
-                icon={<HelpOutlineIcon />} 
-                component={Link}
-                to="/help"
-            />
+        
+        <ThemeProvider theme={theme}>
+            <BottomNavigation
+            value={value}
+            onChange={(event, newValue) => {
+                setValue(newValue);
+            }}
+            showLabels
+            className={classes.root}
+            >
+                <BottomNavigationAction 
+                    label="News" 
+                    icon={<AnnouncementOutlinedIcon />} 
+                    component={Link}
+                    to="/news"
+                />
+                <BottomNavigationAction 
+                    label="StockSunny" 
+                    icon={<HomeIcon />} 
+                    component={Link}
+                    to="/"
+                />
+                <BottomNavigationAction 
+                    label="Help" 
+                    icon={<HelpOutlineIcon />} 
+                    component={Link}
+                    to="/help"
+                />
 
-        </BottomNavigation>
+            </BottomNavigation>
+        </ThemeProvider>
     );
 }

@@ -9,6 +9,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import MainPage from "./pages/MainPage";
 import NewsPage from "./pages/NewsPage";
 import HelpPage from "./pages/HelpPage";
+import DetailPage from "./pages/DetailPage";
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -27,6 +28,9 @@ function App() {
           </Route>
           <Route path="/help">
             <HelpPage />
+          </Route>
+          <Route path="/profile/:name">
+            <DetailPage />
           </Route>
           <Route path="/">
             <MainPage />

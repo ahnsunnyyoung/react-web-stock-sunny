@@ -8,8 +8,17 @@ import SearchIcon from '@material-ui/icons/Search';
 import RefreshIcon from '@material-ui/icons/Refresh';
 import IconButton from '@material-ui/core/IconButton';
 import{ useDispatch, useSelector } from 'react-redux';
+import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider } from '@material-ui/styles';
+import purple from '@material-ui/core/colors/purple';
 
 import { loadStock } from '../actions';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: purple,
+  },
+});
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -71,44 +80,46 @@ export default function PrimarySearchAppBar() {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="fixed">
-        <Toolbar>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Stock-Sunny
-          </Typography>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+      <ThemeProvider theme={theme}>
+        <AppBar position="fixed">
+          <Toolbar>
+            <Typography className={classes.title} variant="h6" noWrap>
+              Stock-Sunny
+            </Typography>
+            <div className={classes.search}>
+              <div className={classes.searchIcon}>
+                <SearchIcon />
+              </div>
+              <InputBase
+                placeholder="Search…"
+                classes={{
+                  root: classes.inputRoot,
+                  input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                value={name}
+                  onChange={(event) => {
+                      setName(event.target.value);
+                  }}
+                  onKeyDown={(event)=>{
+                      if (event.keyCode === 13){
+                          if (!loading){
+                              dispatch(loadStock(name))
+                              setName("");
+                          }
+                          event.preventDefault();
+                          return false;
+                      }
+                  }}
+              />
             </div>
-            <InputBase
-              placeholder="Search…"
-              classes={{
-                root: classes.inputRoot,
-                input: classes.inputInput,
-              }}
-              inputProps={{ 'aria-label': 'search' }}
-              value={name}
-                onChange={(event) => {
-                    setName(event.target.value);
-                }}
-                onKeyDown={(event)=>{
-                    if (event.keyCode === 13){
-                        if (!loading){
-                            dispatch(loadStock(name))
-                            setName("");
-                        }
-                        event.preventDefault();
-                        return false;
-                    }
-                }}
-            />
-          </div>
-          <div className={classes.grow} />
-          <IconButton color="inherit" aria-label="refresh">
-            <RefreshIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+            <div className={classes.grow} />
+            <IconButton color="inherit" aria-label="refresh">
+              <RefreshIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
+      </ThemeProvider>
     </div>
   );
 }
