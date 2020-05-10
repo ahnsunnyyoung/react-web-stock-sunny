@@ -20,6 +20,7 @@ export function loadStock(company) {
                 token: API_KEY
             }});
             result.data.name = name.data.name
+            result.data.ticker = name.data.company
             dispatch({
                 type: 'LOAD_STOCK',
                 payload: result.data
@@ -33,6 +34,21 @@ export function loadStock(company) {
             dispatch({ type: 'END_LOADING' });
         }
     };
+}
+
+export function loadProfile(company) {
+    return async (dispatch) => {
+        const p_url = `${BASE_URL}/stock/profile2?`;
+
+        const profile = await axios(p_url, {params: {
+            symbol: company,
+            token: API_KEY
+        }});
+        dispatch({
+            type: 'LOAD_PROFILE',
+            payload: profile.data
+        });
+    }
 }
 
 

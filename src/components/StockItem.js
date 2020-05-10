@@ -7,6 +7,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import { Sparklines, SparklinesLine, SparklinesReferenceLine} from 'react-sparklines';
 import { styled } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom';
 
 const StyledCardContent = styled(CardContent) ({
     width: "100%",
@@ -22,7 +23,11 @@ export default class StockItem extends React.Component {
     render() {
         const stock = this.props.data;
         return(
-            <ListItem>
+            <ListItem
+            button = {true}
+            component = {Link}
+            to={`profile/${stock.ticker}`}
+        >
                 <Card>
                     <div>
                         <StyledCardContent>
