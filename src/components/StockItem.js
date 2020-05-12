@@ -32,7 +32,7 @@ export default class StockItem extends React.Component {
                     <div>
                         <StyledCardContent>
                             <Typography component="h5" variant="h5">
-                                {stock.name}
+                                {stock.profile.name}
                             </Typography>
                             <Typography variant="subtitle1" color="textSecondary">
                                 Current Price: {stock.c}

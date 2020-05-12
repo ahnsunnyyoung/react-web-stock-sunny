@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,7 +12,6 @@ import Container from '@material-ui/core/Container';
 
 import AppBar from "../components/AppBar";
 import BottomNav from "../components/BottomNav";
-import {loadProfile} from "../actions";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -33,18 +32,22 @@ const useStyles = makeStyles((theme) => ({
 
 const DetailPage = () => {
     const classes = useStyles();
-    const {  name } = useParams();
-    const dispatch = useDispatch();
-    console.log(name)
-    dispatch(loadProfile(name))
-    const profile = useSelector(state => state.profile);
+    const {  symbol } = useParams();
+    const stocks = useSelector(state => state.stocks);
+    var profile = "";
+    stocks.forEach(stock => {
+        if(stock.ticker===symbol){
+            profile = stock.profile;
+        }
+    });
+    console.log("hi",profile)
     return (
         <>
             <AppBar/>
             <Container maxWidth="sm">
                 <div className={classes.root}>
                     <h1>{profile.name}</h1>
-                    <div className="ticker">{profile.ticker}</div>
+                    <div className="ticker">{symbol}</div>
                     <TableContainer component={Paper}>
                         <Table className={classes.table} aria-label="simple table">
                             <TableBody>

@@ -29,7 +29,7 @@ function App() {
           <Route path="/help">
             <HelpPage />
           </Route>
-          <Route path="/profile/:name">
+          <Route path="/profile/:symbol">
             <DetailPage />
           </Route>
           <Route path="/">

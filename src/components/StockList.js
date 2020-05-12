@@ -34,7 +34,7 @@ export default function StockList() {
         <Grid container spacing={1}>
             <Grid item xs={6}>
                 <List className={classes.root}>
-                    {_.map(stocks, stock => <StockItem key={stock.name} data = {stock}/>)}
+                    {_.map(stocks, stock => <StockItem key={stock.ticker} data = {stock}/>)}
                 </List>
             </Grid>
             <Grid item xs={6}>
