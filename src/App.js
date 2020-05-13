@@ -10,6 +10,7 @@ import MainPage from "./pages/MainPage";
 import NewsPage from "./pages/NewsPage";
 import HelpPage from "./pages/HelpPage";
 import DetailPage from "./pages/DetailPage";
+import NewsDetailPage from "./pages/NewsDetailPage";
 
 const useStyles = makeStyles((theme) => ({
   app: {
@@ -31,6 +32,9 @@ function App() {
           </Route>
           <Route path="/profile/:symbol">
             <DetailPage />
+          </Route>
+          <Route path="/article/:id">
+            <NewsDetailPage />
           </Route>
           <Route path="/">
             <MainPage />

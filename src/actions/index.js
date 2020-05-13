@@ -3,27 +3,38 @@ import axios from 'axios';
 const BASE_URL = "https://finnhub.io/api/v1/";
 const API_KEY = "bqnc08frh5re7283le90";
 
-export function loadStock(company) {
+export function loadStock(symbol) {
     return async (dispatch) => {
         dispatch({ type: 'START_LOADING' });
         dispatch({ type: 'CLEAR_ERRORS' });
         const s_url = `${BASE_URL}quote?`;
         const p_url = `${BASE_URL}/stock/profile2?`;
+        const n_url = `${BASE_URL}/company-news?symbol=AAPL&from=2020-05-12&to=2020-05-12`;
+
 
         try{
-            const result = await axios(s_url, {params: {
-                symbol: company,
+            const company = await axios(s_url, {params: {
+                symbol: symbol,
                 token: API_KEY
             }});
             const profile = await axios(p_url, {params: {
-                symbol: company,
+                symbol: symbol,
                 token: API_KEY
             }});
-            result.data.ticker = company
-            result.data.profile = profile.data
+            const news = await axios(n_url, {params: {
+                symbol: symbol,
+                from: '2020-05-12',
+                to: '2020-05-12,',
+                token: API_KEY
+            }});
+            const result =[]
+            company.data.ticker = symbol
+            company.data.profile = profile.data
+            result.push(company.data)
+            result.push(news.data[0])
             dispatch({
                 type: 'LOAD_STOCK',
-                payload: result.data
+                payload: result
             });
         }catch(error){
             dispatch({

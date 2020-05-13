@@ -1,11 +1,9 @@
-/* global google */
 import React from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import { Sparklines, SparklinesLine, SparklinesReferenceLine} from 'react-sparklines';
 import { styled } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 
@@ -15,9 +13,6 @@ const StyledCardContent = styled(CardContent) ({
   });
 
 export default class StockItem extends React.Component {
-    constructor(props){
-        super(props)
-    }
 
 
     render() {
