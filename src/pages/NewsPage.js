@@ -5,10 +5,12 @@ import GridList from '@material-ui/core/GridList';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
+import _ from 'lodash';
 
 import AppBar from "../components/AppBar";
 import BottomNav from "../components/BottomNav";
 import NewsItem from "../components/NewsItem";
+import ErrorMessage from "../components/ErrorMessage";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,10 +48,11 @@ export default function NewsPage() {
                 <AnnouncementIcon/> Stock News
             </div>
             <Divider/>
+            <ErrorMessage/>
         </Container>
         <div className={classes.root}>
             <GridList cellHeight={160} className={classes.gridList} cols={3}>
-                {news.map((article) => <NewsItem key={article.id} data = {article}/>)}
+                {_.map(news, article => <NewsItem key={article.id} data = {article}/>)}
             </GridList>
         </div>
         <BottomNav/>

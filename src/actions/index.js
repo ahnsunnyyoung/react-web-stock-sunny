@@ -31,7 +31,7 @@ export function loadStock(symbol) {
             company.data.ticker = symbol
             company.data.profile = profile.data
             result.push(company.data)
-            result.push(news.data[0])
+            result.push(news.data)
             dispatch({
                 type: 'LOAD_STOCK',
                 payload: result

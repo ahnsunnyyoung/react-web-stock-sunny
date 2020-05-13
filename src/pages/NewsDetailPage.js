@@ -34,12 +34,7 @@ const NewsDetailPage = () => {
     const classes = useStyles();
     const {  id } = useParams();
     const newsdata = useSelector(state => state.news);
-    var news = "";
-    newsdata.forEach(article => {
-        if(article.id==id){
-            news = article;
-        }
-    });
+    var news = newsdata[id];
     return (
         <>
             <AppBar/>

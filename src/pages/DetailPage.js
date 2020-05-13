@@ -34,12 +34,7 @@ const DetailPage = () => {
     const classes = useStyles();
     const {  symbol } = useParams();
     const stocks = useSelector(state => state.stocks);
-    var profile = "";
-    stocks.forEach(stock => {
-        if(stock.ticker===symbol){
-            profile = stock.profile;
-        }
-    });
+    var profile = stocks[symbol];
     console.log("hi",profile)
     return (
         <>
