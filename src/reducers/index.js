@@ -37,13 +37,11 @@ const reducer = produce((state, action) => {
     switch(action.type){
         case "LOAD_STOCK":
             if(state.stocks[action.payload[0].ticker]){
-                console.log('이미 회사 넣었다 자식아');
             }
             
             state.stocks[action.payload[0].ticker] = action.payload[0] || {};
             action.payload[1].forEach(item => {
                 if(state.news[item.id]){
-                    console.log(item.id,'이미 뉴스 넣었다 자식아');
                 }else{
                     state.news[item.id] = item || {};
                 }
