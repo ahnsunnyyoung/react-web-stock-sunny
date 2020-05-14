@@ -38,7 +38,6 @@ export default function SimpleBottomNavigation() {
         const check = path.split('/')[1]
         if (check === "news") return 0;
         if (check === "help") return 2;
-        if (check === "profile") return 1;
         if (check === "article") return 0;
         return 1;
     });

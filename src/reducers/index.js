@@ -3,38 +3,19 @@ const baseState = {
     loading: false,
     error: "",
     stocks:{
-        AAPL: {
-            c: 311.41,
-            h: 319.688,
-            l: 310.91,
-            o: 317.83,
-            pc: 315.01,
-            t: 1589365281,
-            ticker: 'AAPL',
-            profile: {
-              country: 'US',
-              currency: 'USD',
-              exchange: 'NASDAQ NMS - GLOBAL MARKET',
-              finnhubIndustry: 'Technology',
-              ipo: '1980-12-12',
-              logo: 'https://static.finnhub.io/logo/87cb30d8-80df-11ea-8951-00000000092a.png',
-              marketCapitalization: 1365359,
-              name: 'Apple Inc',
-              phone: '14089961010',
-              shareOutstanding: 4334.335,
-              ticker: 'AAPL',
-              weburl: 'https://www.apple.com/'
-            }
-        }
     },
     news:{
     },
-    };
+    selected: undefined,
+};
 
 
 
 const reducer = produce((state, action) => {
     switch(action.type){
+        case "COMPANY_SELECT":
+            state.selected = action.payload;
+            break;
         case "LOAD_STOCK":
             if(state.stocks[action.payload[0].ticker]){
             }

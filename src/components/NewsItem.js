@@ -23,8 +23,10 @@ const StyledIcon = styled(IconButton)`
 export default class NewsItem extends React.Component {
 
 
+
     render() {
         const news = this.props.data;
+        var date = new Date(news.datetime*1000);
         return(
             <StyledGridListTile 
             component = {Link}
@@ -33,7 +35,7 @@ export default class NewsItem extends React.Component {
                 <StyledImg src={news.image} alt={news.headline} />
                 <GridListTileBar
                 title={news.headline}
-                subtitle={<span>Category: {news.category}</span>}
+                subtitle={<span>date: {(date.getMonth()+1) + '월 '+ date.getDate() + '일'}</span>}
                 actionIcon={
                     <StyledIcon aria-label={`info about ${news.related}`}>
                     <InfoIcon />

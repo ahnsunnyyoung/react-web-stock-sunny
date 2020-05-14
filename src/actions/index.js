@@ -9,8 +9,10 @@ export function loadStock(symbol) {
         dispatch({ type: 'CLEAR_ERRORS' });
         const s_url = `${BASE_URL}quote?`;
         const p_url = `${BASE_URL}/stock/profile2?`;
-        const n_url = `${BASE_URL}/company-news?symbol=AAPL&from=2020-05-12&to=2020-05-12`;
-
+        const n_url = `${BASE_URL}/company-news?`;
+        const e_url = `${BASE_URL}//calendar/earnings?`;
+        var today = new Date();  
+        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
         try{
             const company = await axios(s_url, {params: {
@@ -23,13 +25,24 @@ export function loadStock(symbol) {
             }});
             const news = await axios(n_url, {params: {
                 symbol: symbol,
-                from: '2020-05-12',
-                to: '2020-05-12,',
+                from: date,
+                to: date,
                 token: API_KEY
             }});
-            const result =[]
-            company.data.ticker = symbol
-            company.data.profile = profile.data
+            const earning = await axios(e_url, {params: {
+                from: '2010-01-01',
+                to: '2020-03-15',
+                symbol: symbol,
+                token: API_KEY
+            }});
+            const result =[];
+            const earnings = [];
+            earning.data.earningsCalendar.forEach(item => {
+                earnings.push(item.revenueActual)
+            });
+            company.data.ticker = symbol;
+            company.data.profile = profile.data;
+            company.data.earningsCalendar = earnings.reverse();
             result.push(company.data)
             result.push(news.data)
             dispatch({
@@ -47,5 +60,10 @@ export function loadStock(symbol) {
     };
 }
 
-
+export function selectCompany(company){
+    return {
+        type: 'COMPANY_SELECT',
+        payload: company
+    };
+}
 

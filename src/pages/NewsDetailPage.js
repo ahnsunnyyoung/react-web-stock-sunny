@@ -16,17 +16,16 @@ import BottomNav from "../components/BottomNav";
 const useStyles = makeStyles((theme) => ({
     root: {
         marginTop: 80,
-        marginBottom: theme.spacing(7),
+        marginBottom: 80,
     },
     imgWrapper: {
         textAlign: 'center',
         marginTop: theme.spacing(3),
         width: "100%",
     },
-    ticker: {
-        margin: `${theme.spacing(1)}px 0`,
-        fontWeight: "bold",
-        color: "#369"
+    img: {
+        width: '100%',
+        height: '100%'
     },
 }));
 
@@ -35,6 +34,7 @@ const NewsDetailPage = () => {
     const {  id } = useParams();
     const newsdata = useSelector(state => state.news);
     var news = newsdata[id];
+    var date = new Date(news.datetime*1000);
     return (
         <>
             <AppBar/>
@@ -49,13 +49,13 @@ const NewsDetailPage = () => {
                                         date.
                                     </TableCell>
                                     <TableCell>
-                                        {news.datetime}
+                                        {(date.getMonth()+1) + '월 '+ date.getDate() + '일'}
                                     </TableCell>
                                 </TableRow>
                                 <TableRow key="img">
                                     <TableCell colSpan={2}>
                                     <div className={classes.imgWrapper}>
-                                        <img src={news.image} alt={news.headline} />
+                                        <img src={news.image} alt={news.headline} className={classes.img}/>
                                     </div>
                                     </TableCell>
                                 </TableRow>
