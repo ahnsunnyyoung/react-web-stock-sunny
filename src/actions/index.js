@@ -37,6 +37,8 @@ export function loadStock(symbol) {
             }});
             const result =[];
             const earnings = [];
+            company.data.diff = (company.data.c - company.data.pc).toFixed();
+            company.data.percent = ((company.data.c - company.data.pc)/company.data.pc*100).toFixed(2);
             earning.data.earningsCalendar.forEach(item => {
                 earnings.push(item.revenueActual)
             });

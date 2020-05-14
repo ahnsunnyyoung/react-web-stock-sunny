@@ -7,6 +7,7 @@ import { Sparklines, SparklinesLine, SparklinesReferenceLine} from 'react-sparkl
 import { selectCompany } from '../actions';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -25,7 +26,36 @@ const useStyles = makeStyles((theme) => ({
         display: 'inline-block',
         position: 'absolute',
     },
+    logo: {
+        width: 25,
+        height: 25,
+        marginRight: 1,
+    },
 }));
+
+function selectPercent(per, diff){
+    if(per<0){
+        return(
+            <ListItemText primary={
+                <React.Fragment>
+                    <span style={{color:'#D80A0A'}}>
+                        <b>{per}%</b>({diff})
+                    </span>
+                </React.Fragment>
+            } />
+        );
+    }else{
+        return(
+            <ListItemText primary={
+                <React.Fragment>
+                    <span style={{color:'#0AA5D8'}}>
+                        <b>{per}%</b>({diff})
+                    </span>
+                </React.Fragment>
+            } />
+        );
+    }
+}
 
 export default function StockItem({stock}) {
     const classes = useStyles();
@@ -36,11 +66,10 @@ export default function StockItem({stock}) {
                 <div className={classes.detail}>
                     <CardContent>
                         <Typography component="h5" variant="h5">
+                            <img src={stock.profile.logo} alt={stock.profile.ticker} className={classes.logo}/>
                             {stock.profile.name}
                         </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
-                            Current Price: {stock.c}
-                        </Typography>
+                        {selectPercent(stock.percent, stock.diff)}
                         <Typography variant="subtitle1" color="textSecondary">
                             High Price: {stock.h}
                         </Typography>

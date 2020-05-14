@@ -9,7 +9,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
-import { Sparklines, SparklinesLine, SparklinesReferenceLine} from 'react-sparklines';
+import CallIcon from '@material-ui/icons/Call';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,6 +29,15 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: '10px',
         color: 'rgb(180, 121, 175)',
     },
+    logo: {
+        width: 50,
+        height: 50,
+        marginRight: 2,
+    },
+    th: {
+        fontWeight: 'bold',
+        color: 'rgb(180, 121, 175)',
+    }
 }));
 
 function DetailItem() {
@@ -55,36 +64,50 @@ function DetailItem() {
         <Container maxWidth="sm">
             <div className={classes.root}>
                 <div className={classes.title}>{profile.name}</div>
+                <img src={profile.logo} alt={profile.ticker} className={classes.logo}/> 
                 <div className={classes.ticker}>{profile.ticker}</div>
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
                         <TableBody>
-                            <TableRow key="exchanges">
-                                <TableCell component="th" scope="row">
-                                    Exchange
+                            <TableRow key="countryCurrncy">
+                                <TableCell className={classes.th} component="th" scope="row">
+                                    Country
                                 </TableCell>
                                 <TableCell>
+                                    {profile.country}
+                                </TableCell>
+                                <TableCell className={classes.th} component="th" scope="row">
+                                    Currency
+                                </TableCell>
+                                <TableCell>
+                                    {profile.currency}
+                                </TableCell>
+                            </TableRow>
+                            <TableRow key="exchanges">
+                                <TableCell className={classes.th} colSpan={2} component="th" scope="row">
+                                    Exchange
+                                </TableCell>
+                                <TableCell colSpan={2}>
                                     {profile.exchange}
                                 </TableCell>
                             </TableRow>
                             <TableRow key="ipo_date">
-                                <TableCell component="th" scope="row">
+                                <TableCell className={classes.th} colSpan={2} component="th" scope="row">
                                     IPO date.
                                 </TableCell>
-                                <TableCell>
-                                    {profile.ipo}
+                                <TableCell colSpan={2}>
                                 </TableCell>
                             </TableRow>
-                            <TableRow key="ipo_date">
-                                <TableCell component="th" scope="row">
-                                    IPO date.
+                            <TableRow key="phone" >
+                                <TableCell className={classes.th} colSpan={2} component="th" scope="row">
+                                    <CallIcon/>
                                 </TableCell>
-                                <TableCell>
-                                    {profile.ipo}
+                                <TableCell colSpan={2} component="th" scope="row">
+                                    {profile.phone}
                                 </TableCell>
                             </TableRow>
                             <TableRow key="url" >
-                                <TableCell colSpan={2} component="th" scope="row">
+                                <TableCell colSpan={4} component="th" scope="row">
                                     {profile.weburl}
                                 </TableCell>
                             </TableRow>
@@ -92,12 +115,6 @@ function DetailItem() {
                     </Table>
                 </TableContainer>
             </div>
-            <div className={classes.graph}>
-                    <Sparklines data={stock.earningsCalendar}  height={100} width={300} svgHeight={100} svgWidth={300}>
-                        <SparklinesLine color="blue"/>
-                        <SparklinesReferenceLine type='mean'/>
-                    </Sparklines>
-                </div>
         </Container>
     );
 };

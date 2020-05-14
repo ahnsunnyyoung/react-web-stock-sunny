@@ -32,6 +32,8 @@ const MainPage = () => {
     dispatch(loadStock('AAPL'))
     dispatch(loadStock('MSFT'))
     dispatch(loadStock('AMZN'))
+
+    
     return (
         <>
             <AppBar/>
