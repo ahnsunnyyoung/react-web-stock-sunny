@@ -8,6 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
+import ListItemText from '@material-ui/core/ListItemText';
 import Alert from '@material-ui/lab/Alert';
 import CallIcon from '@material-ui/icons/Call';
 
@@ -40,6 +41,30 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+function selectPercent(per, diff){
+    if(per<0){
+        return(
+            <ListItemText primary={
+                <React.Fragment>
+                    <span style={{color:'#D80A0A'}}>
+                        <b>{per}%</b>({diff})
+                    </span>
+                </React.Fragment>
+            } />
+        );
+    }else{
+        return(
+            <ListItemText primary={
+                <React.Fragment>
+                    <span style={{color:'#0AA5D8'}}>
+                        <b>{per}%</b>({diff})
+                    </span>
+                </React.Fragment>
+            } />
+        );
+    }
+}
+
 function DetailItem() {
     const classes = useStyles();
     const aapl = useSelector(state => state.stocks['AAPL']);
@@ -69,6 +94,17 @@ function DetailItem() {
                 <TableContainer component={Paper}>
                     <Table className={classes.table} aria-label="simple table">
                         <TableBody>
+                            <TableRow key="differ">
+                                <TableCell className={classes.th} component="th" scope="row">
+                                    Current Price
+                                </TableCell>
+                                <TableCell>
+                                    {stock.c}
+                                </TableCell>
+                                <TableCell colSpan={2} component="th" scope="row">
+                                    {selectPercent(stock.percent, stock.diff)}
+                                </TableCell>
+                            </TableRow>
                             <TableRow key="countryCurrncy">
                                 <TableCell className={classes.th} component="th" scope="row">
                                     Country
@@ -96,6 +132,7 @@ function DetailItem() {
                                     IPO date.
                                 </TableCell>
                                 <TableCell colSpan={2}>
+                                    {profile.ipo}
                                 </TableCell>
                             </TableRow>
                             <TableRow key="phone" >

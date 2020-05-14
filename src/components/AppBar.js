@@ -72,11 +72,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+function refreshPage() {
+  window.location.reload(false);
+}
+
 export default function PrimarySearchAppBar() {
   const [name, setName] = useState("");
   const classes = useStyles();
   const dispatch = useDispatch()
-    const loading = useSelector(state => state.loading)
+  const loading = useSelector(state => state.loading)
 
   return (
     <div className={classes.grow}>
@@ -115,7 +119,7 @@ export default function PrimarySearchAppBar() {
             </div>
             <div className={classes.grow} />
             <IconButton color="inherit" aria-label="refresh">
-              <RefreshIcon />
+              <RefreshIcon onClick={refreshPage}/>
             </IconButton>
           </Toolbar>
         </AppBar>
