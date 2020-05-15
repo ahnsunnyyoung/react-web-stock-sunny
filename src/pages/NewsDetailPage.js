@@ -35,13 +35,13 @@ const NewsDetailPage = () => {
     const newsdata = useSelector(state => state.news);
     var news;
     var date;
-    if(news === newsdata.company[id]){
+    if(news = newsdata.company[id]){
         news = newsdata.company[id];
         date = new Date(news.datetime*1000);
-    }else if(news === newsdata.general[id]){
+    }else if(news = newsdata.general[id]){
         news = newsdata.general[id];
         date = new Date(news.datetime*1000);
-    }else if(news === newsdata.forex[id]){
+    }else if(news = newsdata.forex[id]){
         news = newsdata.forex[id];
         date = new Date(news.datetime*1000);
     }

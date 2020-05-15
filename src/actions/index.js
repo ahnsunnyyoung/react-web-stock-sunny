@@ -139,3 +139,73 @@ export function loadForexNews(){
         }
     };
 }
+
+export function loadCandle(){
+    return async (dispatch) => {
+        const url = `${BASE_URL}/forex/candle?`;
+
+        try{
+            const candle = await axios(url, {params: {
+                symbol: 'OANDA:EUR_USD',
+                resolution: 60,
+                from:1589446800,
+                to:1589533200,
+                token: API_KEY
+            }});
+            var result = [];
+            for(var i=0; i<candle.data.t.length; i++ ){
+                var a ={};
+                a.x= new Date(candle.data.t[i]*1000);
+                var list =[candle.data.o[i],candle.data.h[i],candle.data.l[i],candle.data.c[i]];
+                a.y=list;
+                result.push(a);
+            }
+            dispatch({
+                type: 'LOAD_CANDLE',
+                payload: result,
+            });
+        }catch(error){
+            dispatch({
+                type: 'ERROR',
+                payload: error
+            });
+        }
+    };
+}
+
+export function loadCovid(){
+    return async (dispatch) => {
+        const url = `${BASE_URL}/covid19/us?`;
+
+        try{
+            const covid = await axios(url, {params: {
+                token: API_KEY
+            }});
+            var result = {};
+            var cases = [];
+            var death = [];
+            var state = [];
+            var updated = [];
+            for(var i=0; i<20; i++ ){
+                var d = covid.data[i];
+                cases.push(d.case);
+                death.push(d.death);
+                state.push(d.state);
+                updated.push(d.updated);
+            }
+            result.case = cases;
+            result.death = death;
+            result.state = state;
+            result.updated = updated;
+            dispatch({
+                type: 'LOAD_COVID',
+                payload: result,
+            });
+        }catch(error){
+            dispatch({
+                type: 'ERROR',
+                payload: error
+            });
+        }
+    };
+}

@@ -18,6 +18,8 @@ const baseState = {
         }
     },
     selected: undefined,
+    candle: [],
+    covid: [],
 };
 
 
@@ -26,6 +28,12 @@ const reducer = produce((state, action) => {
     switch(action.type){
         case "COMPANY_SELECT":
             state.selected = action.payload;
+            break;
+        case "LOAD_CANDLE":
+            state.candle = action.payload;
+            break;
+        case "LOAD_COVID":
+            state.covid = action.payload;
             break;
         case "LOAD_STOCK":
             if(state.stocks[action.payload[0].ticker]){

@@ -3,13 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import ListAltIcon from '@material-ui/icons/ListAlt';
-import { useDispatch } from 'react-redux';
 
 import AppBar from "../components/AppBar";
 import BottomNav from "../components/BottomNav";
 import ErrorMessage from "../components/ErrorMessage";
 import StockList from "../components/StockList";
-import { loadStock, loadForex } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,11 +26,6 @@ const useStyles = makeStyles((theme) => ({
 
 const MainPage = () => {
     const classes = useStyles();
-    const dispatch = useDispatch();
-    dispatch(loadStock('AAPL'))
-    dispatch(loadStock('MSFT'))
-    dispatch(loadStock('AMZN'))
-    dispatch(loadForex())
 
     
     return (

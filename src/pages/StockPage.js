@@ -6,12 +6,13 @@ import ShowChartIcon from '@material-ui/icons/ShowChart';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import purple from '@material-ui/core/colors/purple';
-import { useDispatch } from 'react-redux';
+import Grid from '@material-ui/core/Grid';
 
 import AppBar from "../components/AppBar";
 import BottomNav from "../components/BottomNav";
+import CandleChart from "../components/CandleChart";
+import BarChart from "../components/BarChart";
 import ErrorMessage from "../components/ErrorMessage";
-import { loadForex } from '../actions';
 
 const theme = createMuiTheme({
     palette: {
@@ -42,8 +43,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function StockPage() {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  dispatch(loadForex())
   
   return (
     <>
@@ -56,7 +55,21 @@ export default function StockPage() {
                 </div>
                 <Divider/>
                 <ErrorMessage/>
-                
+                <Grid container spacing={1}>
+                  <Grid item xs={6}>
+                    <Grid container spacing={2}>
+                      <Grid item xs={12}>
+                        <CandleChart/>
+                      </Grid>
+                      <Grid item xs={12}>
+                        <CandleChart/>
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <BarChart/>
+                  </Grid>
+                </Grid>
             </Container>
         </ThemeProvider>
         <BottomNav/>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector} from 'react-redux';
 import GridList from '@material-ui/core/GridList';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import _ from 'lodash';
@@ -10,7 +10,6 @@ import AppBar from "../components/AppBar";
 import BottomNav from "../components/BottomNav";
 import NewsItem from "../components/NewsItem";
 import ErrorMessage from "../components/ErrorMessage";
-import { loadStock, loadForex, loadGeneralNews, loadForexNews } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,13 +41,6 @@ const useStyles = makeStyles((theme) => ({
  
 export default function NewsPage() {
   const classes = useStyles();
-  const dispatch = useDispatch();
-  dispatch(loadStock('AAPL'))
-  dispatch(loadStock('MSFT'))
-  dispatch(loadStock('AMZN'))
-  dispatch(loadForex())
-  dispatch(loadGeneralNews())
-  dispatch(loadForexNews())
   const Cnews = useSelector(state => state.news.company);
   const Gnews = useSelector(state => state.news.general);
   const Fnews = useSelector(state => state.news.forex);
