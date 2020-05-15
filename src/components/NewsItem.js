@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import IconButton from '@material-ui/core/IconButton';
 import InfoIcon from '@material-ui/icons/Info';
 
-const StyledImg = styled('img')`
+const StyledDiv = styled('div')`
   width: 280px;
   height: 180px;
 `;
@@ -32,7 +32,9 @@ export default class NewsItem extends React.Component {
             component = {Link}
             to={`article/${news.id}`}
             key={news.id}>
-                <StyledImg src={news.image} alt={news.headline} />
+                <StyledDiv>
+                    <img src={news.image} alt={news.headline} />
+                </StyledDiv>
                 <GridListTileBar
                 title={news.headline}
                 subtitle={<span>date: {(date.getMonth()+1) + '월 '+ date.getDate() + '일'}</span>}

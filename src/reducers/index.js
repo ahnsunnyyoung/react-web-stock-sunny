@@ -4,9 +4,18 @@ const baseState = {
     error: "",
     stocks:{
     },
-    news:{
-    },
     forex:{
+    },
+    news:{
+        company:{
+
+        },
+        general:{
+
+        },
+        forex:{
+
+        }
     },
     selected: undefined,
 };
@@ -24,12 +33,31 @@ const reducer = produce((state, action) => {
             
             state.stocks[action.payload[0].ticker] = action.payload[0] || {};
             action.payload[1].forEach(item => {
-                if(state.news[item.id]){
+                if(state.news.company[item.id]){
                 }else{
-                    state.news[item.id] = item || {};
+                    console.log("in")
+                    state.news.company[item.id] = item || {};
                 }
             });
             break;
+        case 'LOAD_GENERAL_NEWS':
+            action.payload.forEach(item => {
+                if(state.news.general[item.id]){
+                }else{
+                    console.log("in")
+                    state.news.general[item.id] = item || {};
+                }
+            });
+            break;  
+        case 'LOAD_FOREX_NEWS':
+            action.payload.forEach(item => {
+                if(state.news.forex[item.id]){
+                }else{
+                    console.log("in")
+                    state.news.forex[item.id] = item || {};
+                }
+            });
+            break;  
         case 'LOAD_FOREX':
             state.forex = action.payload;
             break;

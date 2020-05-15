@@ -33,8 +33,18 @@ const NewsDetailPage = () => {
     const classes = useStyles();
     const {  id } = useParams();
     const newsdata = useSelector(state => state.news);
-    var news = newsdata[id];
-    var date = new Date(news.datetime*1000);
+    var news;
+    var date;
+    if(news === newsdata.company[id]){
+        news = newsdata.company[id];
+        date = new Date(news.datetime*1000);
+    }else if(news === newsdata.general[id]){
+        news = newsdata.general[id];
+        date = new Date(news.datetime*1000);
+    }else if(news === newsdata.forex[id]){
+        news = newsdata.forex[id];
+        date = new Date(news.datetime*1000);
+    }
     return (
         <>
             <AppBar/>

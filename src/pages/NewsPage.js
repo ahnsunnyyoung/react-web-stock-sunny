@@ -2,19 +2,21 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { useSelector, useDispatch } from 'react-redux';
 import GridList from '@material-ui/core/GridList';
-import Divider from '@material-ui/core/Divider';
-import Container from '@material-ui/core/Container';
 import AnnouncementIcon from '@material-ui/icons/Announcement';
 import _ from 'lodash';
+import Grid from '@material-ui/core/Grid';
 
 import AppBar from "../components/AppBar";
 import BottomNav from "../components/BottomNav";
 import NewsItem from "../components/NewsItem";
 import ErrorMessage from "../components/ErrorMessage";
-import { loadStock } from '../actions';
+import { loadStock, loadForex, loadGeneralNews, loadForexNews } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    marginTop: 80,
+    textAlign: 'center',
+    fontWeight: 'bold',
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
@@ -24,12 +26,12 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: '70px',
   },
   title: {
-      textAlign: 'center',
-      marginTop: 80,
-      marginBottom: 15,
-      fontWeight: 'bold',
-      fontSize: 30
   },
+  subtitle: {
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 20
+},
   divider: {
     margin: 20,
 },
@@ -44,22 +46,49 @@ export default function NewsPage() {
   dispatch(loadStock('AAPL'))
   dispatch(loadStock('MSFT'))
   dispatch(loadStock('AMZN'))
-  const news = useSelector(state => state.news);
+  dispatch(loadForex())
+  dispatch(loadGeneralNews())
+  dispatch(loadForexNews())
+  const Cnews = useSelector(state => state.news.company);
+  const Gnews = useSelector(state => state.news.general);
+  const Fnews = useSelector(state => state.news.forex);
 
   return (
     <>
         <AppBar/>
-        <Container fixed>
-            <div className={classes.title} >
-                <AnnouncementIcon/> Stock News
-            </div>
-            <Divider/>
-            <ErrorMessage/>
-        </Container>
         <div className={classes.root}>
-            <GridList cellHeight={160} className={classes.gridList} cols={3}>
-                {_.map(news, article => <NewsItem key={article.id} data = {article}/>)}
-            </GridList>
+          <ErrorMessage/>
+          <Grid container spacing={1}>
+              <Grid item xs={6}>
+                <div className={classes.subtitle} >
+                  <AnnouncementIcon/> Company News
+                </div>
+                <GridList cellHeight={160} className={classes.gridList} cols={3}>
+                    {_.map(Cnews, article => <NewsItem key={article.id} data = {article}/>)}
+                </GridList>
+              </Grid>
+              <Grid item xs={6}>
+                  
+                  <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                      <div className={classes.subtitle} >
+                        <AnnouncementIcon/> General News
+                      </div>
+                      <GridList cellHeight={160} className={classes.gridList} cols={3}>
+                          {_.map(Gnews, article => <NewsItem key={article.id} data = {article}/>)}
+                      </GridList>
+                    </Grid>
+                    <Grid item xs={12}>
+                      <div className={classes.subtitle} >
+                        <AnnouncementIcon/> Forex News
+                      </div>
+                      <GridList cellHeight={160} className={classes.gridList} cols={3}>
+                          {_.map(Fnews, article => <NewsItem key={article.id} data = {article}/>)}
+                      </GridList>
+                    </Grid>
+                  </Grid>
+              </Grid>
+          </Grid>
         </div>
         <BottomNav/>
     </>

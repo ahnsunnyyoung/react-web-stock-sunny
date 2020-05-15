@@ -4,7 +4,7 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import AnnouncementOutlinedIcon from '@material-ui/icons/AnnouncementOutlined';
 import HomeIcon from '@material-ui/icons/Home';
-import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
+import ShowChartIcon from '@material-ui/icons/ShowChart';
 import { Link, useLocation } from 'react-router-dom';
 import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -37,7 +37,7 @@ export default function SimpleBottomNavigation() {
         const path = location.pathname;
         const check = path.split('/')[1]
         if (check === "news") return 0;
-        if (check === "help") return 2;
+        if (check === "stock") return 2;
         if (check === "article") return 0;
         return 1;
     });
@@ -66,10 +66,10 @@ export default function SimpleBottomNavigation() {
                     to="/"
                 />
                 <BottomNavigationAction 
-                    label="Help" 
-                    icon={<HelpOutlineIcon />} 
+                    label="Stock" 
+                    icon={<ShowChartIcon/>} 
                     component={Link}
-                    to="/help"
+                    to="/stock"
                 />
 
             </BottomNavigation>

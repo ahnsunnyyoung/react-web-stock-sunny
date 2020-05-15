@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 export default function StockList() {
     const stocks = useSelector(state => state.stocks);
     const classes = useStyles();
+
     return (
         <Grid container spacing={1}>
             <Grid item xs={6}>

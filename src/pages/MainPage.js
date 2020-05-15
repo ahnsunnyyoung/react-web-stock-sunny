@@ -41,7 +41,7 @@ const MainPage = () => {
             <Container fixed>
                 <div className={classes.root}>
                     <div className={classes.title} >
-                        <ListAltIcon/> Stock List
+                        <ListAltIcon/> Home
                     </div>
                     <Divider />
                     <ErrorMessage/>

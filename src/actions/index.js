@@ -91,3 +91,51 @@ export function loadForex(){
     };
 }
 
+
+export function loadGeneralNews(){
+    return async (dispatch) => {
+        const f_url = `${BASE_URL}/news?`;
+
+        try{
+            const general = await axios(f_url, {params: {
+                category: 'general',
+                minId:2,
+                token: API_KEY
+            }});
+            general.data = general.data.slice(0,4);
+            dispatch({
+                type: 'LOAD_GENERAL_NEWS',
+                payload: general.data,
+            });
+        }catch(error){
+            dispatch({
+                type: 'ERROR',
+                payload: error
+            });
+        }
+    };
+}
+
+export function loadForexNews(){
+    return async (dispatch) => {
+        const f_url = `${BASE_URL}/news?`;
+
+        try{
+            const forex = await axios(f_url, {params: {
+                category: 'forex',
+                minId:2,
+                token: API_KEY
+            }});
+            forex.data = forex.data.slice(0,4);
+            dispatch({
+                type: 'LOAD_FOREX_NEWS',
+                payload: forex.data,
+            });
+        }catch(error){
+            dispatch({
+                type: 'ERROR',
+                payload: error
+            });
+        }
+    };
+}
