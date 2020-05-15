@@ -70,6 +70,21 @@ const useStyles = makeStyles((theme) => ({
       width: '20ch',
     },
   },
+  exchange: {
+    borderRadius: 15,
+    backgroundColor: 'rgb(104, 36, 98)',
+    padding: 10,
+  },
+  forexTitle: {
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
+  forex: {
+    fontWeight: 'bold',
+    marginLeft: 30,
+    marginLRight: 20,
+    fontSize: 20,
+  },
 }));
 
 function refreshPage() {
@@ -81,6 +96,7 @@ export default function PrimarySearchAppBar() {
   const classes = useStyles();
   const dispatch = useDispatch()
   const loading = useSelector(state => state.loading)
+  const forex = useSelector(state => state.forex);
 
   return (
     <div className={classes.grow}>
@@ -117,9 +133,13 @@ export default function PrimarySearchAppBar() {
                   }}
               />
             </div>
+            <div className={classes.exchange}>
+              <span className={classes.forexTitle}>EUR/USD</span>
+              <span className={classes.forex}>{forex['USD']}</span>
+            </div>
             <div className={classes.grow} />
-            <IconButton color="inherit" aria-label="refresh">
-              <RefreshIcon onClick={refreshPage}/>
+            <IconButton color="inherit" aria-label="refresh" onClick={refreshPage}>
+              <RefreshIcon/>
             </IconButton>
           </Toolbar>
         </AppBar>

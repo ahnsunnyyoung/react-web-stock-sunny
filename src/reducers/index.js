@@ -6,6 +6,8 @@ const baseState = {
     },
     news:{
     },
+    forex:{
+    },
     selected: undefined,
 };
 
@@ -27,8 +29,9 @@ const reducer = produce((state, action) => {
                     state.news[item.id] = item || {};
                 }
             });
-            
-
+            break;
+        case 'LOAD_FOREX':
+            state.forex = action.payload;
             break;
         case 'ERROR':
             state.error = action.payload;

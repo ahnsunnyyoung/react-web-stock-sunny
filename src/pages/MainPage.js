@@ -9,7 +9,7 @@ import AppBar from "../components/AppBar";
 import BottomNav from "../components/BottomNav";
 import ErrorMessage from "../components/ErrorMessage";
 import StockList from "../components/StockList";
-import { loadStock } from '../actions';
+import { loadStock, loadForex } from '../actions';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         marginTop: 80,
-        marginBottom: 20,
+        marginBottom: 15,
         fontWeight: 'bold',
         fontSize: 30
     },
@@ -32,6 +32,7 @@ const MainPage = () => {
     dispatch(loadStock('AAPL'))
     dispatch(loadStock('MSFT'))
     dispatch(loadStock('AMZN'))
+    dispatch(loadForex())
 
     
     return (

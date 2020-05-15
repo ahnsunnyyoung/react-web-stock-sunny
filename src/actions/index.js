@@ -10,7 +10,7 @@ export function loadStock(symbol) {
         const s_url = `${BASE_URL}quote?`;
         const p_url = `${BASE_URL}/stock/profile2?`;
         const n_url = `${BASE_URL}/company-news?`;
-        const e_url = `${BASE_URL}//calendar/earnings?`;
+        const e_url = `${BASE_URL}/calendar/earnings?`;
         var today = new Date();  
         var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
@@ -66,6 +66,28 @@ export function selectCompany(company){
     return {
         type: 'COMPANY_SELECT',
         payload: company
+    };
+}
+
+
+export function loadForex(){
+    return async (dispatch) => {
+        const f_url = `${BASE_URL}/forex/rates?`;
+
+        try{
+            const forex = await axios(f_url, {params: {
+                token: API_KEY
+            }});
+            dispatch({
+                type: 'LOAD_FOREX',
+                payload: forex.data.quote,
+            });
+        }catch(error){
+            dispatch({
+                type: 'ERROR',
+                payload: error
+            });
+        }
     };
 }
 
