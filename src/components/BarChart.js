@@ -19,7 +19,7 @@ export default function BarChart() {
             height: 500
           },
           title: {
-              text: 'COVID-19 US',
+              text: `COVID-19 US (updated at ${covid.updated[0]})`,
               align: 'left'
           },
           dataLabels: {
