@@ -18,7 +18,7 @@ const baseState = {
         }
     },
     selected: undefined,
-    candle: [],
+    candle: {},
     covid: [],
 };
 

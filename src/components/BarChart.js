@@ -7,45 +7,44 @@ export default function BarChart() {
 
     const info = {
         series: [{
-          data: covid.case
+          name: "Case",
+          data: covid.case,
         }, {
-          data: covid.death
+          name: "Death",
+          data: covid.death,
         }],
         options: {
           chart: {
             type: 'bar',
-            height: 460
+            height: 500
+          },
+          title: {
+              text: 'COVID-19 US',
+              align: 'left'
+          },
+          dataLabels: {
+            enabled: false,
           },
           plotOptions: {
             bar: {
               horizontal: true,
-              dataLabels: {
-                position: 'top',
-              },
-            }
-          },
-          dataLabels: {
-            enabled: true,
-            offsetX: -6,
-            style: {
-              fontSize: '12px',
-              colors: ['#fff']
             }
           },
           stroke: {
             show: true,
             width: 1,
-            colors: ['#fff']
+            colors: ['#FFF']
           },
           xaxis: {
             categories: covid.state
           },
         },
+        
     };
     
       return (
         <div id="chart">
-            <ReactApexChart options={info.options} series={info.series} type="bar" height={460} />
+            <ReactApexChart options={info.options} series={info.series} type="bar" height={500} />
         </div>
       );
     

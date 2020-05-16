@@ -7,6 +7,7 @@ import { createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import purple from '@material-ui/core/colors/purple';
 import Grid from '@material-ui/core/Grid';
+import { useSelector} from 'react-redux';
 
 import AppBar from "../components/AppBar";
 import BottomNav from "../components/BottomNav";
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function StockPage() {
   const classes = useStyles();
+  const candle = useSelector(state => state.candle);
   
   return (
     <>
@@ -59,10 +61,10 @@ export default function StockPage() {
                   <Grid item xs={6}>
                     <Grid container spacing={2}>
                       <Grid item xs={12}>
-                        <CandleChart/>
+                        <CandleChart candle={candle.usd} name='USD'/>
                       </Grid>
                       <Grid item xs={12}>
-                        <CandleChart/>
+                        <CandleChart candle={candle.jpy} name='JPY'/>
                       </Grid>
                     </Grid>
                   </Grid>

@@ -2,6 +2,14 @@ import axios from 'axios';
 
 const BASE_URL = "https://finnhub.io/api/v1/";
 const API_KEY = "bqnc08frh5re7283le90";
+const today = new Date();  
+const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+
+function toTimestamp(year,month,day,hour,minute,second){
+    var datum = new Date(Date.UTC(year,month-1,day,hour,minute,second));
+    return datum.getTime()/1000;
+   }
+
 
 export function loadStock(symbol) {
     return async (dispatch) => {
@@ -11,9 +19,6 @@ export function loadStock(symbol) {
         const p_url = `${BASE_URL}/stock/profile2?`;
         const n_url = `${BASE_URL}/company-news?`;
         const e_url = `${BASE_URL}/calendar/earnings?`;
-        var today = new Date();  
-        var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-
         try{
             const company = await axios(s_url, {params: {
                 symbol: symbol,
@@ -140,26 +145,42 @@ export function loadForexNews(){
     };
 }
 
+function formatting(candle){
+    var result = [];
+    for(var i=0; i<candle.data.t.length; i++ ){
+        var a ={};
+        a.x= new Date(candle.data.t[i]*1000);
+        var list =[candle.data.o[i],candle.data.h[i],candle.data.l[i],candle.data.c[i]];
+        a.y=list;
+        result.push(a);
+    }
+    return result
+}
+
 export function loadCandle(){
     return async (dispatch) => {
         const url = `${BASE_URL}/forex/candle?`;
-
+        const from = toTimestamp(today.getFullYear(),today.getMonth()+1,today.getDate()-1,9,0,0);
+        const to = toTimestamp(today.getFullYear(),today.getMonth()+1,today.getDate(),9,0,0);
         try{
-            const candle = await axios(url, {params: {
+            const USDcandle = await axios(url, {params: {
                 symbol: 'OANDA:EUR_USD',
                 resolution: 60,
-                from:1589446800,
-                to:1589533200,
+                from:from,
+                to:to,
                 token: API_KEY
             }});
-            var result = [];
-            for(var i=0; i<candle.data.t.length; i++ ){
-                var a ={};
-                a.x= new Date(candle.data.t[i]*1000);
-                var list =[candle.data.o[i],candle.data.h[i],candle.data.l[i],candle.data.c[i]];
-                a.y=list;
-                result.push(a);
-            }
+            const JPYcandle = await axios(url, {params: {
+                symbol: 'OANDA:EUR_JPY',
+                resolution: 60,
+                from:from,
+                to:to,
+                token: API_KEY
+            }});
+            console.log(from, to)
+            var result = {};
+            result.usd = formatting(USDcandle);
+            result.jpy = formatting(JPYcandle);
             dispatch({
                 type: 'LOAD_CANDLE',
                 payload: result,
@@ -186,7 +207,7 @@ export function loadCovid(){
             var death = [];
             var state = [];
             var updated = [];
-            for(var i=0; i<20; i++ ){
+            for(var i=0; i<10; i++ ){
                 var d = covid.data[i];
                 cases.push(d.case);
                 death.push(d.death);

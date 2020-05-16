@@ -79,6 +79,11 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontSize: 15,
   },
+  forexSTitle: {
+    marginLeft: 30,
+    fontWeight: 'bold',
+    fontSize: 15,
+  },
   forex: {
     fontWeight: 'bold',
     marginLeft: 30,
@@ -136,6 +141,10 @@ export default function PrimarySearchAppBar() {
             <div className={classes.exchange}>
               <span className={classes.forexTitle}>EUR/USD</span>
               <span className={classes.forex}>{forex['USD']}</span>
+              <span className={classes.forexSTitle}>EUR/JPY</span>
+              <span className={classes.forex}>{forex['JPY']}</span>
+              <span className={classes.forexSTitle}>EUR/CNY</span>
+              <span className={classes.forex}>{forex['CNY']}</span>
             </div>
             <div className={classes.grow} />
             <IconButton color="inherit" aria-label="refresh" onClick={refreshPage}>

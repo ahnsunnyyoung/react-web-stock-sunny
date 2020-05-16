@@ -1,12 +1,11 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
-import { useSelector} from 'react-redux';
 
-export default function CandleChart() {
-    const candle = useSelector(state => state.candle);
+export default function CandleChart(candle) {
+    console.log("hihihihi",candle)
     const info = {
         series: [{
-            data: candle
+            data: candle.candle
         }],
         options: {
             chart: {
@@ -14,7 +13,7 @@ export default function CandleChart() {
                 height: 230
             },
             title: {
-                text: 'CandleStick Chart',
+                text: `CandleStick Chart(Forex EUR/${candle.name})`,
                 align: 'left'
             },
             xaxis: {
