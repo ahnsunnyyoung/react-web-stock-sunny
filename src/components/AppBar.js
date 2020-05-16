@@ -74,6 +74,9 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 15,
     backgroundColor: 'rgb(104, 36, 98)',
     padding: 10,
+    [theme.breakpoints.down('md')]: {
+      display:'none',
+    },
   },
   forexTitle: {
     fontWeight: 'bold',

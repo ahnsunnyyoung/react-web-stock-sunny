@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import _ from 'lodash';
 import List from '@material-ui/core/List';
-import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
 import StockItem from './StockItem';
@@ -10,7 +9,20 @@ import DetailItem from './DetailItem';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        display: 'block',
+    },
+    list: {
+        display: 'inline-block',
+        width: '50%',
+        [theme.breakpoints.down('md')]: {
+            width: '100%',
+          },
+    },
+    detail: {
+        display: 'inline-block',
+        width: '50%',
+        [theme.breakpoints.down('md')]: {
+            display:'none',
+        },
     },
     cover: {
         width: 151,
@@ -32,17 +44,17 @@ export default function StockList() {
     const classes = useStyles();
 
     return (
-        <Grid container spacing={1}>
-            <Grid item xs={6}>
-                <List className={classes.root}>
+        <div className={classes.root}>
+            <div className={classes.list}>
+                <List>
                     {_.map(stocks, stock => <StockItem key={stock.ticker} stock = {stock} />)}
                 </List>
-            </Grid>
-            <Grid item xs={6}>
-                <List className={classes.root}>
+            </div>
+            <div className={classes.detail}>
+                <List>
                     <DetailItem/>
                 </List>
-            </Grid>
-        </Grid>
+            </div>
+        </div>
     );
 }

@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
         width: "45%",
         height: '150px',
         display: 'inline-block',
+        [theme.breakpoints.down('md')]: {
+            width: "100%",
+        },
     },
     graph: {
         width: "55%",
@@ -25,11 +28,24 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: '10px',
         display: 'inline-block',
         position: 'absolute',
+        [theme.breakpoints.down('md')]: {
+            display:'none',
+        },
     },
     logo: {
         width: 25,
         height: 25,
         marginRight: 1,
+    },
+    title: {
+        [theme.breakpoints.down('md')]: {
+            display:'inline-block',
+        },
+    },
+    subtitle: {
+        [theme.breakpoints.down('md')]: {
+            display:'none'
+        },
     },
 }));
 
@@ -65,17 +81,21 @@ export default function StockItem({stock}) {
             <Card className={classes.card}>
                 <div className={classes.detail}>
                     <CardContent>
+                        <div className={classes.title}>
                         <Typography component="h5" variant="h5">
                             <img src={stock.profile.logo} alt={stock.profile.ticker} className={classes.logo}/>
                             {stock.profile.name}
                         </Typography>
                         {selectPercent(stock.percent, stock.diff)}
+                        </div>
+                        <div className={classes.subtitle}>
                         <Typography variant="subtitle1" color="textSecondary">
                             High Price: {stock.h}
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
                             Low Price: {stock.l}
                         </Typography>
+                        </div>
                     </CardContent>
                 </div>
                 <div className={classes.graph}>
