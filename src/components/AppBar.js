@@ -105,6 +105,8 @@ export default function PrimarySearchAppBar() {
   const dispatch = useDispatch()
   const loading = useSelector(state => state.loading)
   const forex = useSelector(state => state.forex);
+  const today = new Date();  
+  const time = today.getHours() + "시 " + today.getMinutes() + "분 " + today.getSeconds() + '초';
 
   return (
     <div className={classes.grow}>
@@ -148,6 +150,8 @@ export default function PrimarySearchAppBar() {
               <span className={classes.forex}>{forex['JPY']}</span>
               <span className={classes.forexSTitle}>EUR/CNY</span>
               <span className={classes.forex}>{forex['CNY']}</span>
+              <span className={classes.forexSTitle}>Data Time</span>
+              <span className={classes.forex}>{time}</span>
             </div>
             <div className={classes.grow} />
             <IconButton color="inherit" aria-label="refresh" onClick={refreshPage}>
