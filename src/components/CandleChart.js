@@ -1,8 +1,9 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
+
 export default function CandleChart(candle) {
-    console.log("hihihihi",candle)
+    
     const info = {
         series: [{
             data: candle.candle

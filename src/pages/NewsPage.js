@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bold',
     fontSize: 20
 },
+Rsubtitle: {
+  textAlign: 'center',
+  fontWeight: 'bold',
+  fontSize: 20,
+  margin: '10px 0px 36px 0px',
+},
   divider: {
     margin: 20,
 },
@@ -48,19 +54,17 @@ chip: {
   margin: theme.spacing(0.5),
 },
 }));
-
  
 export default function NewsPage() {
   const classes = useStyles();
-  const Cnews = useSelector(state => state.news.company);
   const Gnews = useSelector(state => state.news.general);
   const Fnews = useSelector(state => state.news.forex);
+  const Cnews = useSelector(state => state.news.company);
   const [chipData] = React.useState([
     { key: 0, label: 'APPLE' },
     { key: 1, label: 'MICROSOFT' },
     { key: 2, label: 'AMAZON' },
   ]);
-
 
   return (
     <>
@@ -88,14 +92,14 @@ export default function NewsPage() {
                   })}
                 </div>
                 <GridList cellHeight={160} className={classes.gridList} cols={3}>
-                    {_.map(Cnews, article => <NewsItem key={article.id} data = {article}/>)}
+                  {_.map(Cnews, article => <NewsItem key={article.id} data = {article}/>)}
                 </GridList>
               </Grid>
               <Grid item xs={6}>
                   
                   <Grid container spacing={2}>
                     <Grid item xs={12}>
-                      <div className={classes.subtitle} >
+                      <div className={classes.Rsubtitle} >
                         <AnnouncementIcon/> General News
                       </div>
                       <GridList cellHeight={160} className={classes.gridList} cols={3}>
@@ -103,7 +107,7 @@ export default function NewsPage() {
                       </GridList>
                     </Grid>
                     <Grid item xs={12}>
-                      <div className={classes.subtitle} >
+                      <div className={classes.Rsubtitle} >
                         <AnnouncementIcon/> Forex News
                       </div>
                       <GridList cellHeight={160} className={classes.gridList} cols={3}>

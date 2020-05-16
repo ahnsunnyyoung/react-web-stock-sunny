@@ -20,6 +20,7 @@ const theme = createMuiTheme({
   },
 });
 
+
 ReactDOM.render(
   <Provider store={store}>
     <React.StrictMode>

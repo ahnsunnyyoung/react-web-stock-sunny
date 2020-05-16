@@ -177,7 +177,6 @@ export function loadCandle(){
                 to:to,
                 token: API_KEY
             }});
-            console.log(from, to)
             var result = {};
             result.usd = formatting(USDcandle);
             result.jpy = formatting(JPYcandle);

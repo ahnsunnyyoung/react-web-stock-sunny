@@ -10,6 +10,9 @@ const baseState = {
         company:{
 
         },
+        carr:[
+
+        ],
         general:{
 
         },
@@ -43,8 +46,8 @@ const reducer = produce((state, action) => {
             action.payload[1].forEach(item => {
                 if(state.news.company[item.id]){
                 }else{
-                    console.log("in")
                     state.news.company[item.id] = item || {};
+                    state.news.carr.push(item);
                 }
             });
             break;
@@ -52,7 +55,6 @@ const reducer = produce((state, action) => {
             action.payload.forEach(item => {
                 if(state.news.general[item.id]){
                 }else{
-                    console.log("in")
                     state.news.general[item.id] = item || {};
                 }
             });
@@ -61,7 +63,6 @@ const reducer = produce((state, action) => {
             action.payload.forEach(item => {
                 if(state.news.forex[item.id]){
                 }else{
-                    console.log("in")
                     state.news.forex[item.id] = item || {};
                 }
             });
