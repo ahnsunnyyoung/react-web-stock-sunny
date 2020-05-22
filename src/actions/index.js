@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const BASE_URL = "https://finnhub.io/api/v1/";
 const API_KEY = "bqnc08frh5re7283le90";
-const today = new Date('May 15, 2020 09:00:00');  
+const today = new Date();  
 const date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
 function toTimestamp(year,month,day,hour,minute,second){
